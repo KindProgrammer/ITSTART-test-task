@@ -22,25 +22,16 @@ const SeminarsContainer = () => {
         <>
             <h1>Семинары</h1>
             <div className='seminars-container'>
-                { data.map((seminar) => {
-                    const {         
-                        id,
-                        title,
-                        description,
-                        date,
-                        time,
-                        photo} = seminar
-                    return(
+                { data.map((seminar) => 
                     <Seminar 
-                        id={id}
-                        title={title}
-                        description={description}
-                        date={date}
-                        time={time}
-                        photo={photo}
+                        id={seminar.id}
+                        title={seminar.title}
+                        description={seminar.description}
+                        date={seminar.date}
+                        time={seminar.time}
+                        photo={seminar.photo}
                     />
-                    );
-                }) }
+                )}
             </div>
         </>
     );
