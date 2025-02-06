@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import './App.scss'
-import SeminarsContainer from './Components/SeminarsContainer.jsx'
+import MainPage from './Pages/MainPage.jsx'
 
 function App() {
   return (
     <>
-      <SeminarsContainer />
+      <MainPage />
     </>
   )
 }

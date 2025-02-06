@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import Seminar from './Seminar.jsx';
+import React, { useState, useEffect, useId } from 'react';
+import Seminar from '../Components/Seminar.jsx';
+import getSeminars from '../api/seminars.js';
+import { Container, Row } from 'react-bootstrap';
 
-const SeminarsContainer = () => {
+const MainPage = () => {
     const [data, setData] = useState([]);
     console.log(data);
     useEffect(() => {
         const requestData = async () => {
-            const response = await fetch('http://localhost:3000/seminars')
-            .then(async (response) => {
-                setData(await response.json());
-            })
-            .catch((e) => {
-                alert("Ошибка HTTP: " + response.status);
-            });
+            setData(await getSeminars());
         };
 
-          requestData();
+        requestData();
     }, []);
 
     return (
-        <>
-            <h1>Семинары</h1>
-            <div className='seminars-container'>
+        <Container className='bg-light p-4'>
+            <Row><h1 className='mb-4'>Семинары</h1></Row>
+            <div>
                 { data.map((seminar) => 
                     <Seminar 
+                        key={seminar.id}
                         id={seminar.id}
                         title={seminar.title}
                         description={seminar.description}
@@ -33,8 +30,8 @@ const SeminarsContainer = () => {
                     />
                 )}
             </div>
-        </>
+        </Container>
     );
 }
 
-export default SeminarsContainer;
+export default MainPage;
