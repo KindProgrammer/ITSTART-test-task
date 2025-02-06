@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './App.css'
+import './App.scss'
 import SeminarsContainer from './Components/SeminarsContainer.jsx'
 
 function App() {
