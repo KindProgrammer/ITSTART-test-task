@@ -1,8 +1,17 @@
-# React + Vite
+# Тестовое задание ITSTART
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Приложение для просмотра, удаления и редактирования семинаров
 
-Currently, two official plugins are available:
+## Как использовать
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Запуск мок сервера:
+
+```
+$ npm run mock-server
+```
+
+Запуск приложения:
+
+```
+$ npm run dev
+```
