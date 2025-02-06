@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useId } from 'react';
 import Seminar from '../Components/Seminar.jsx';
-import getSeminars from '../api/seminars.js';
+import { getSeminars } from '../api/seminars.js';
 import { Container, Row } from 'react-bootstrap';
 
 const MainPage = () => {
@@ -15,7 +15,7 @@ const MainPage = () => {
     }, []);
 
     return (
-        <Container className='bg-light p-4'>
+        <Container className='bg-light p-4 rounded'>
             <Row><h1 className='mb-4'>Семинары</h1></Row>
             <div>
                 { data.map((seminar) => 

@@ -10,16 +10,9 @@ const Seminar = (props) => {
     const handleCloseDeleteModal = () => setShowDeleteModal(false);
     const handleShowDeleteModal = () => setShowDeleteModal(true);
 
-    const deleteSeminar = () => {
-        handleShowDeleteModal()
-    }
-
-    const editSeminar = () => {
-
-    }
-
     return (
         <Container>
+            {showDeleteModal ? <DeleteSeminarModal seminarId={props.id} seminarTitle={props.title} closeCallback={handleCloseDeleteModal} /> : ''}
             <Row className='seminar-card justify-content-between mb-2 border-bottom'>
                 <Col className='d-flex flex-column justify-content-center align-items-center'>
                     <p className="fs-2 mb-0">{props.time ?? '??:??'}</p>
@@ -30,8 +23,8 @@ const Seminar = (props) => {
                     <p className='text-start'>{props.description ?? 'Unknown description'}</p>
                 </Col>
                 <Col className='d-flex align-items-center justify-content-center'>
-                    <Button variant="outline-dark" onClick={deleteSeminar}><img src={trashIcon} alt="Удалить"></img></Button>
-                    <Button variant="outline-dark" className='ms-1' onClick={editSeminar}><img src={pencilIcon} alt="Редактировать"></img></Button>
+                    <Button variant="outline-dark" onClick={handleShowDeleteModal}><img src={trashIcon} alt="Удалить"></img></Button>
+                    <Button variant="outline-dark" className='ms-1' ><img src={pencilIcon} alt="Редактировать"></img></Button>
                 </Col>
             </Row>
         </Container>
