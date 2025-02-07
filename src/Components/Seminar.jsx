@@ -3,8 +3,8 @@ import { Container,Button, Col, Row } from 'react-bootstrap';
 import DeleteSeminarModal from './DeleteSeminarModal.jsx';
 import EditSeminarModal from './EditSeminarModal.jsx';
 
-import trashIcon from '../assets/trash.svg';
-import pencilIcon from '../assets/pencil.svg';
+import TrashIcon from '../assets/trash.svg?react';
+import PencilIcon from '../assets/pencil.svg?react';
 
 const Seminar = (props) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -29,8 +29,8 @@ const Seminar = (props) => {
                     <p className='text-start'>{props.description ?? 'Unknown description'}</p>
                 </Col>
                 <Col className='d-flex align-items-center justify-content-center'>
-                    <Button variant="outline-dark" onClick={handleShowDeleteModal}><img src={trashIcon} alt="Удалить"></img></Button>
-                    <Button variant="outline-dark" onClick={handleShowEditModal} className='ms-1' ><img src={pencilIcon} alt="Редактировать"></img></Button>
+                    <Button variant="outline-dark" onClick={handleShowDeleteModal}><TrashIcon /></Button>
+                    <Button variant="outline-dark" onClick={handleShowEditModal} className='ms-1' ><PencilIcon /></Button>
                 </Col>
             </Row>
         </Container>
