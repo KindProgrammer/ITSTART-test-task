@@ -23,8 +23,8 @@ const DeleteSeminarModal = (props) => {
           </Modal.Body>
   
           <Modal.Footer>
-              <Button className='w-25' variant="outline-danger" onClick={handelDeleteSeminar}>{isDeleting ? <Spinner as="span" animation="border" size="sm" /> : 'Удалить'}</Button>
-              <Button className='w-25' variant="outline-dark" onClick={props.closeCallback}>Отмена</Button>
+              <Button className='w-25' variant="outline-danger" disabled={isDeleting} onClick={handelDeleteSeminar}>{isDeleting ? <Spinner as="span" animation="border" size="sm" /> : 'Удалить'}</Button>
+              <Button className='w-25' variant="outline-dark" disabled={isDeleting} onClick={props.closeCallback}>Отмена</Button>
           </Modal.Footer>
       </Modal>
     );
