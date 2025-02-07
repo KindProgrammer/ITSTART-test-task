@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Modal, Button, Spinner } from "react-bootstrap";
-import { deleteSeminar } from "../api/seminars.js";
+import { deleteSeminar, getSeminars } from "../api/seminars.js";
+import { seminarsState } from "../state/seminarsState.js";
 
 
 const DeleteSeminarModal = (props) => {
@@ -9,6 +10,7 @@ const DeleteSeminarModal = (props) => {
         setDeleting(true);
         await deleteSeminar(props.seminarId);
         props.closeCallback();
+        seminarsState.updateSeminars();
     }
 
     return (

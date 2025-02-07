@@ -1,9 +1,10 @@
 import { Modal, Button, Spinner } from "react-bootstrap";
-import { editSeminar } from "../api/seminars.js";
+import { editSeminar, getSeminars } from "../api/seminars.js";
 import { Form } from "react-bootstrap";
 import { useFormik } from 'formik';
 import editFormSchema from "../validate.js";
 import moment from "moment";
+import { seminarsState } from "../state/seminarsState.js";
 
 const FORM_FIELD_DATE_FORMAT = 'yyyy-MM-DD';
 const DATE_FORMAT = 'DD.MM.yyyy';
@@ -24,10 +25,15 @@ const EditSeminarModal = (props) => {
                 date: moment(values.date).format(DATE_FORMAT),
                 time: values.time,
             }
-            editSeminar(props.seminar.id, updatedSeminar).finally(() => {
-                formik.setSubmitting(false);
-                props.closeCallback();
-            });
+            editSeminar(props.seminar.id, updatedSeminar)
+                .then(async () => {
+                    seminarsState.updateSeminars();
+                })
+                .finally(() => {
+                    formik.setSubmitting(false);
+                    props.closeCallback();
+                });
+            
         },
     });
 

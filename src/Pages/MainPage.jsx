@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Seminar from '../Components/Seminar.jsx';
-import { getSeminars } from '../api/seminars.js';
 import { Container, Row, Spinner } from 'react-bootstrap';
+import { observer } from 'mobx-react';
+import { seminarsState } from '../state/seminarsState.js';
 
-const MainPage = () => {
-    const [data, setData] = useState(null);
-    console.log(data);
+const MainPage = observer(() => {
+    const { seminars, isLoading, isError } = seminarsState;
+
     useEffect(() => {
         const requestData = async () => {
-            setData(await getSeminars());
+            seminarsState.updateSeminars();
         };
 
         requestData();
@@ -16,12 +17,18 @@ const MainPage = () => {
 
     let content;
 
-    if (data === null) {
+    if (isLoading) {
         content = 
             <div className='d-flex justify-content-center align-items-center pb-5'>
                 <Spinner animation="border"/>
             </div>
-    } else if (data.length === 0) {
+    } else if (isError) {
+        content = 
+            <Container>
+                <p>Во время загрузки семинаров произошла ошибка</p>
+            </Container>
+
+    } else if (seminars.length === 0) {
         content =
             <Container>
                 <h2>Семинаров не найдено</h2>
@@ -29,7 +36,7 @@ const MainPage = () => {
     } else {
         content = 
             <Container>{
-                data.map((seminar) => 
+                seminars.map((seminar) => 
                     <Seminar 
                         key={seminar.id}
                         id={seminar.id}
@@ -48,6 +55,6 @@ const MainPage = () => {
             {content}
         </Container>
     );
-}
+});
 
 export default MainPage;

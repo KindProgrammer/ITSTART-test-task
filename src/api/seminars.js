@@ -1,3 +1,4 @@
+import { seminarsState } from "../state/seminarsState";
 import delay from "../utils/delay";
 
 const getSeminars = async () => {
@@ -9,7 +10,7 @@ const getSeminars = async () => {
             return response.json();
         })
         .catch((e) => {
-            alert("Ошибка HTTP: " + e.status);
+            seminarsState.setError(e);
         });
 }
 
