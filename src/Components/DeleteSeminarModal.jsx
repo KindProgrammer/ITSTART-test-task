@@ -1,16 +1,24 @@
 import { useState } from "react";
 import { Modal, Button, Spinner } from "react-bootstrap";
-import { deleteSeminar, getSeminars } from "../api/seminars.js";
+import { deleteSeminar } from "../api/seminars.js";
 import { seminarsState } from "../state/seminarsState.js";
-
+import { toast } from "react-toastify";
 
 const DeleteSeminarModal = (props) => {
     const [isDeleting, setDeleting] = useState(false);
     const handelDeleteSeminar = async () => {
         setDeleting(true);
-        await deleteSeminar(props.seminarId);
-        props.closeCallback();
-        seminarsState.updateSeminars();
+        deleteSeminar(props.seminarId)
+            .then(() => {
+                seminarsState.updateSeminars();
+                toast.success(`Семинар ${ props.seminarTitle ? `"${props.seminarTitle}"`: "без имени" } успешно удален`, { theme: 'light' });
+            })
+            .catch(() => {
+                toast.error('Произошла ошибка, семинар не был удален!', { theme: 'light' });
+            })
+            .finally(() => {
+                props.closeCallback();
+            });
     }
 
     return (

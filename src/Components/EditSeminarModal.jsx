@@ -1,13 +1,12 @@
 import { Modal, Button, Spinner } from "react-bootstrap";
-import { editSeminar, getSeminars } from "../api/seminars.js";
+import { editSeminar } from "../api/seminars.js";
 import { Form } from "react-bootstrap";
 import { useFormik } from 'formik';
 import editFormSchema from "../validate.js";
 import moment from "moment";
 import { seminarsState } from "../state/seminarsState.js";
-
-const FORM_FIELD_DATE_FORMAT = 'yyyy-MM-DD';
-const DATE_FORMAT = 'DD.MM.yyyy';
+import { toast } from "react-toastify";
+import { DATE_FORMAT, FORM_FIELD_DATE_FORMAT } from "../utils/date.js";
 
 const EditSeminarModal = (props) => {
     const formik = useFormik({
@@ -28,6 +27,10 @@ const EditSeminarModal = (props) => {
             editSeminar(props.seminar.id, updatedSeminar)
                 .then(async () => {
                     seminarsState.updateSeminars();
+                    toast.success('Семинар успешно обновлен', { theme: 'light' });
+                })
+                .catch(() => {
+                    toast.error('Произошла ошибка, семинар не был обновлен!', { theme: 'light' });
                 })
                 .finally(() => {
                     formik.setSubmitting(false);
