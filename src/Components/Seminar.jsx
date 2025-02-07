@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container,Button, Col, Row } from 'react-bootstrap';
 import DeleteSeminarModal from './DeleteSeminarModal.jsx';
+import EditSeminarModal from './EditSeminarModal.jsx';
 
 import trashIcon from '../assets/trash.svg';
 import pencilIcon from '../assets/pencil.svg';
@@ -10,9 +11,14 @@ const Seminar = (props) => {
     const handleCloseDeleteModal = () => setShowDeleteModal(false);
     const handleShowDeleteModal = () => setShowDeleteModal(true);
 
+    const [showEditModal, setShowEditModal] = useState(false);
+    const handleCloseEditModal = () => setShowEditModal(false);
+    const handleShowEditModal = () => setShowEditModal(true);
+
     return (
         <Container>
             {showDeleteModal ? <DeleteSeminarModal seminarId={props.id} seminarTitle={props.title} closeCallback={handleCloseDeleteModal} /> : ''}
+            {showEditModal ? <EditSeminarModal seminar={props} closeCallback={handleCloseEditModal} /> : ''}
             <Row className='seminar-card justify-content-between mb-2 border-bottom'>
                 <Col className='d-flex flex-column justify-content-center align-items-center'>
                     <p className="fs-2 mb-0">{props.time ?? '??:??'}</p>
@@ -24,7 +30,7 @@ const Seminar = (props) => {
                 </Col>
                 <Col className='d-flex align-items-center justify-content-center'>
                     <Button variant="outline-dark" onClick={handleShowDeleteModal}><img src={trashIcon} alt="Удалить"></img></Button>
-                    <Button variant="outline-dark" className='ms-1' ><img src={pencilIcon} alt="Редактировать"></img></Button>
+                    <Button variant="outline-dark" onClick={handleShowEditModal} className='ms-1' ><img src={pencilIcon} alt="Редактировать"></img></Button>
                 </Col>
             </Row>
         </Container>
