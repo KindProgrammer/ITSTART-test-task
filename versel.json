@@ -1,8 +1,8 @@
 {
     "functions": {
-      "api/server.js": {
+      "mock-server/server.js": {
         "memory": 1024,
-        "includeFiles": "db.json"
+        "includeFiles": "mock-server/seminars.json"
       }
     },
     "rewrites": [

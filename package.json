@@ -3,10 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "mock-server/server.js",
   "scripts": {
+    "start": "node mock-server/server.js",
     "dev": "vite",
     "build": "vite build",
-    "mock-server": "node mock-server/server.cjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
