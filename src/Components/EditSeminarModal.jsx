@@ -7,7 +7,16 @@ import moment from "moment";
 import { seminarsState } from "../state/seminarsState.js";
 import { toast } from "react-toastify";
 import { DATE_FORMAT, FORM_FIELD_DATE_FORMAT } from "../utils/date.js";
-
+/**
+ * Модальное окно для редактирования семинара.
+ * В пропсы передается объект seminar, который содержит следующие поля: 
+ * title - название семинара.
+ * description - описание.
+ * date - дата проведения.
+ * time - время проведения.
+ * В случае успешного редактирования всплывает оповещение, сообщающее об успешном обновлении семинара, 
+ * в случае ошибки всплывает сообщение с текстом о том, что семинар не был обновлен.
+*/
 const EditSeminarModal = (props) => {
     const formik = useFormik({
         initialValues: { 
@@ -16,7 +25,7 @@ const EditSeminarModal = (props) => {
             date: props.seminar.date? moment(props.seminar.date, DATE_FORMAT).format(FORM_FIELD_DATE_FORMAT) : '',
             time: props.seminar.time ?? ''
         },
-        validationSchema: editFormSchema,
+        validationSchema: editFormSchema, // Валидируем с помощью yup
         onSubmit: (values) => {
             const updatedSeminar = {
                 title: values.title,
@@ -24,13 +33,13 @@ const EditSeminarModal = (props) => {
                 date: moment(values.date).format(DATE_FORMAT),
                 time: values.time,
             }
-            editSeminar(props.seminar.id, updatedSeminar)
+            editSeminar(props.seminar.id, updatedSeminar) // Делаем запрос на сервер для обновления
                 .then(async () => {
-                    seminarsState.updateSeminars();
+                    seminarsState.updateSeminars(); // В случае удачи обновляем хранилище
                     toast.success('Семинар успешно обновлен', { theme: 'light' });
                 })
                 .catch(() => {
-                    toast.error('Произошла ошибка, семинар не был обновлен!', { theme: 'light' });
+                    toast.error('Произошла ошибка, семинар не был обновлен!', { theme: 'light' }); // В случае неудачи оповещаем о ней пользователя
                 })
                 .finally(() => {
                     formik.setSubmitting(false);

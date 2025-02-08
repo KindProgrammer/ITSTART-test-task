@@ -1,6 +1,10 @@
 import { makeAutoObservable } from "mobx";
 import { getSeminars } from "../api/seminars";
 
+/**
+ * Хранилище данных.
+ * Для создания испоьзовался mobx, так как у него простое api
+*/
 class SeminarsState {
     isLoading = false;
     isError = false;
@@ -19,6 +23,7 @@ class SeminarsState {
         
         Promise.resolve()
             .then(async () => this.setSeminars(await getSeminars()))
+            .catch((e) => this.setError(e))
             .finally(() => this.setIsLoading(false))
     }
 }

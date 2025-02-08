@@ -1,5 +1,6 @@
 import { object, string, date} from 'yup';
 
+// Возвращает текущую дату + 100 лет
 const getNowPlus100Years = () => {
     const now = new Date(Date.now());
     now.setFullYear(now.getFullYear() + 100);

@@ -6,6 +6,33 @@ import EditSeminarModal from './EditSeminarModal.jsx';
 import TrashIcon from '../assets/trash.svg?react';
 import PencilIcon from '../assets/pencil.svg?react';
 
+/**
+ * Карточка семинара.
+ * Отображает информацию о семинаре и содержит кнопки для редактирования и удаления семинара.
+ * 
+ * @component
+ * @example
+ * const seminar = {
+ *     "id": "9",
+ *     "title": "Мастер-класс от Kosmoteros",
+ *     "description": "Практический мастер-класс по использованию инновационных косметических средств.",
+ *     "date": "17.02.2025",
+ *     "time": "18:00",
+ *     "photo": "https://picsum.photos/id/9/750/730"
+ *   }
+ * 
+ * return (
+ *   <Seminar
+ *       key={seminar.id}
+ *       id={seminar.id}
+ *       title={seminar.title}
+ *       description={seminar.description}
+ *       date={seminar.date}
+ *       time={seminar.time}
+ *       photo={seminar.photo} 
+ *    />
+ * )
+*/
 const Seminar = (props) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const handleCloseDeleteModal = () => setShowDeleteModal(false);

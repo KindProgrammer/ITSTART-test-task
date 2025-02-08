@@ -4,6 +4,10 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react';
 import { seminarsState } from '../state/seminarsState.js';
 
+/** 
+ * Главная страница.
+ * Отображает список семинаров
+*/
 const MainPage = observer(() => {
     const { seminars, isLoading, isError } = seminarsState;
 

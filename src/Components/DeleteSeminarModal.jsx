@@ -4,20 +4,26 @@ import { deleteSeminar } from "../api/seminars.js";
 import { seminarsState } from "../state/seminarsState.js";
 import { toast } from "react-toastify";
 
+/**
+ * Модальное окно для удаления семинара.
+ * В пропсы передается название (seminarTitle) и id (seminarId) семинара, который нужно удалить
+ * В случае успешного удаления всплывает оповещение, сообщающее об успешном удалении, 
+ * в случае ошибки всплывает сообщение с текстом о том, что семинар не был удален
+*/
 const DeleteSeminarModal = (props) => {
     const [isDeleting, setDeleting] = useState(false);
     const handelDeleteSeminar = async () => {
-        setDeleting(true);
-        deleteSeminar(props.seminarId)
+        setDeleting(true); // Выключаем кнопки
+        deleteSeminar(props.seminarId) // Делаем запрос на сервер для удаления семинара
             .then(() => {
-                seminarsState.updateSeminars();
+                seminarsState.updateSeminars(); // В случае удачи обновляем хранилище
                 toast.success(`Семинар ${ props.seminarTitle ? `"${props.seminarTitle}"`: "без имени" } успешно удален`, { theme: 'light' });
             })
             .catch(() => {
-                toast.error('Произошла ошибка, семинар не был удален!', { theme: 'light' });
+                toast.error('Произошла ошибка, семинар не был удален!', { theme: 'light' }); // В случае неудачи оповещаем о ней пользователя
             })
             .finally(() => {
-                props.closeCallback();
+                props.closeCallback(); // Закрываем модальное окно
             });
     }
 
