@@ -1,5 +1,6 @@
-import { seminarsState } from "../state/seminarsState";
 import delay from "../utils/delay";
+
+const SEMINARS_BASE_URL = import.meta.env.VITE_SERVER_ADDR;
 
 /**
  * Получить от сервера список семинаров
@@ -9,7 +10,7 @@ const getSeminars = async () => {
     // Имитация долгой загрузки
     await delay(2000);
 
-    return fetch('http://localhost:3000/seminars')
+    return fetch(`${SEMINARS_BASE_URL}/seminars`)
         .then(async (response) => {
             return response.json();
         })
@@ -23,7 +24,7 @@ const deleteSeminar = async (id) => {
     // Имитация долгой загрузки
     await delay(2000);
     
-    return fetch(`http://localhost:3000/seminars/${id}/`, {
+    return fetch(`${SEMINARS_BASE_URL}/seminars/${id}/`, {
         method: 'DELETE',
     })
 }
@@ -37,7 +38,7 @@ const editSeminar = async (id, seminar) => {
     // Имитация долгой загрузки
     await delay(2000);
 
-    return fetch(`http://localhost:3000/seminars/${id}/`, {
+    return fetch(`${SEMINARS_BASE_URL}/seminars/${id}/`, {
         method: 'PUT',
         body: JSON.stringify(seminar)
     })

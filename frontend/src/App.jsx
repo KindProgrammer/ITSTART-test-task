@@ -1,4 +1,4 @@
-import MainPage from './Pages/MainPage.jsx'
+import MainPage from './Pages/MainPage.jsx';
 import { ToastContainer } from 'react-toastify';
 
 function App() {
