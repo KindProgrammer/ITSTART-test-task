@@ -19,3 +19,5 @@ $ npm start
 ```
 $ npm run start-frontend
 ```
+
+![example](./example.png)
